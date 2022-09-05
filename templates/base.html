@@ -32,6 +32,13 @@
             box-shadow: 0 16px 48px #E3E7EB;
             padding-top: 10px;
         }
+        .center {
+            margin: auto;
+            width: 60%;
+            border: 3px solid black;
+            padding: 10px;
+            text-align: center;
+        }
     </style>
 
         <!-- Navigation -->
@@ -44,15 +51,24 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item text-black">
-                            <a class="nav-link text-black font-weight-bold" href="#">About</a>
-                        </li>
-                        <li class="nav-item text-black">
-                            <a class="nav-link text-black font-weight-bold" href="#">Policy</a>
-                        </li>
-                        <li class="nav-item text-black">
-                            <a class="nav-link text-black font-weight-bold" href="#">Contact</a>
-                        </li>
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item text-black">
+                                <a class="nav-link text-black font-weight-bold" href="{% url 'add_blogs' %}">Add Blog</a>
+                            </li>
+                            <li class="nav-item text-black">
+                                <a class="nav-link text-black font-weight-bold" href="{% url 'logout' %}">Hello, {{ request.user.username }}</a>
+                            </li>
+                            <li class="nav-item text-black">
+                                <a class="nav-link text-black font-weight-bold" href="{% url 'logout' %}">Logout</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item text-black">
+                                <a class="nav-link text-black font-weight-bold" href="{% url 'register' %}">Register</a>
+                            </li>
+                            <li class="nav-item text-black">
+                                <a class="nav-link text-black font-weight-bold" href="{% url 'login' %}">Login</a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
